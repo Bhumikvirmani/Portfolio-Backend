@@ -16,7 +16,7 @@ exports.sendContactMessage = async (req, res) => {
 
         const emailResponse = await resend.emails.send({
             from:process.env.EMAIL_FROM,
-            to: [process.env.EMAIL_To],
+            to: [process.env.EMAIL_TO],
             replyTo: email,
             subject: `New Portfolio Contact From ${name}`,
             html:
@@ -26,6 +26,8 @@ exports.sendContactMessage = async (req, res) => {
                 <p><strong>Message:</strong></p>
                 <p>${message.replace(/\n/g,"<br>")}</p>`,
         })
+        console.log("Sending email to:", process.env.EMAIL_TO);
+        console.log("Resend response:", emailResponse);
         if(emailResponse.error){
             console.error("Resend error:", emailResponse.error);
             return res.status(500).json({success:false, message:"Failed to send email"});
