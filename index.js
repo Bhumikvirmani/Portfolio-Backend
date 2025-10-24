@@ -9,7 +9,6 @@ const allowedOrigins = [
 ];
 const PORT = process.env.PORT || 5000;
 
-
 app.use(cors({
   origin: allowedOrigins,
   methods: ["GET", "POST", "OPTIONS"],
