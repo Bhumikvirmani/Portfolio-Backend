@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 
-app.use(cors({
+const corsOptions = {
   origin: [
     "https://bhumikvirmani-portfolio.onrender.com",
     "http://localhost:8080"
@@ -18,8 +18,10 @@ app.use(cors({
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
-}));
-app.options("*", cors());
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // use same config here
 
 app.use(express.json());
 mongoose.connect(process.env.MONGO_URI).then(() => console.log("MongoDB connected"));
