@@ -7,6 +7,8 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:8080"               // local frontend
 ];
+const PORT = process.env.PORT || 5000;
+
 
 app.use(cors({
   origin: allowedOrigins,
@@ -17,5 +19,5 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URI).then(() => console.log("MongoDB connected"));
 const contactRoutes = require("./routes/contactRoute");
 app.use("/api/contact", contactRoutes);
-app.listen(5000, () => console.log("Server running at port 5000"));
+app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
 
