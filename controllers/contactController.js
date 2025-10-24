@@ -16,7 +16,7 @@ exports.sendContactMessage = async (req, res) => {
 
         const emailResponse = await resend.emails.send({
             from:process.env.EMAIL_FROM,
-            to: [process.env.EMAIL_TO],
+            to: process.env.EMAIL_TO,
             replyTo: email,
             subject: `New Portfolio Contact From ${name}`,
             html:
