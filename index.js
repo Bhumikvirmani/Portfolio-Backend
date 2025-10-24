@@ -3,9 +3,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require("dotenv").config();
 const app = express();
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "http://localhost:8080"               // local frontend
+];
 
 app.use(cors({
-  origin: "*",
+  origin: allowedOrigins,
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
