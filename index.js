@@ -28,8 +28,16 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // handles preflight requests
-
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+app.get('/', (req, res) => {
+  res.send('Portfolio Backend is running');
+});
 app.use(express.json());
 mongoose.connect(process.env.MONGO_URI).then(() => console.log("MongoDB connected"));
 const contactRoutes = require("./routes/contactRoute");
